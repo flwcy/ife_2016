@@ -32,7 +32,118 @@
             每个节点都有父节点、除了根（它没有父节点）;
             一个节点可拥有任意数量的子;
             同胞是拥有相同父节点的节点;
-            <img src="" alt="图片不可见时的提示"/>
+            <br/>
+            <img src="images/paul.jpg" alt="图片不可见时的提示"/>
         </p>
+        <h1>Box Model</h1>
+        <h2>盒模型</h2>
+        <p>author:flwcy</p>&nbsp;&nbsp;<p>publishDate:2018-04-09</p>
+        <p>
+            <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model" title="盒子模型">盒模型(box model)</a>是CSS中的一个重要概念，它是元素大小的呈现方式。需要记住的是："every element in web design is a rectangular box"。
+            盒模型包含了内容区域的大小（width以及height）和元素的内边距padding，边框border和外边距margin。
+            <br/>
+            Width and height — specifies the width and height of the content area.
+            <br/>
+            Padding — specifies the amount of space between the content area and the border.
+            <br/>
+            Border — specifies the thickness and style of the border surrounding the content area and padding.
+            <br/>
+            Margin — specifies the amount of space between the border and the outside edge of the element.
+            <br/>
+            <img src="images/paul.jpg" alt="图片不可见时的提示"/>
+            <ul>
+                <li>top</li>
+                <li>right</li>
+                <li>bottom</li>
+                <li>left</li>
+            </ul>
+        </p>
+        <h2>照片墙</h2>
+        <p>
+            <dl>
+                <dt><p>Cp3-保罗</p><img src="images/paul.jpg" alt="图片不可见时的提示"/></dt>
+                <dt><p>Cp3-保罗</p><img src="images/paul.jpg" alt="图片不可见时的提示"/></dt>
+                <dt><p>Cp3-保罗</p><img src="images/paul.jpg" alt="图片不可见时的提示"/></dt>
+                <dt><p>Cp3-保罗</p><img src="images/paul.jpg" alt="图片不可见时的提示"/></dt>
+                <dt><p>Cp3-保罗</p><img src="images/paul.jpg" alt="图片不可见时的提示"/></dt>
+            </dl>
+        </p>
+        <h1>内联元素</h1>
+        <h2>特点</h2>
+        <p>author:flwcy</p>&nbsp;&nbsp;<p>publishDate:2018-04-09</p>
+        <p>
+            <ol>
+                <li>和相邻的内联元素在同一行；</li>
+                <li>元素的宽度(width)、高度(height)、内边距的top/bottom(padding-top/padding-bottom)和外边距的top/bottom(margin-top/margin-bottom)都不可变 （水平方向有效，竖直方向无效）；</li>
+                <li>>内联元素的宽度则是根据其自身的内容或子元素来决定其宽度，不可改变。</li>
+            </ol>
+            <span>下面是一个表格，加border="1"是为了让你看出这是一个表格</span>
+            <table border="1">
+                <tbody>
+                    <tr>
+                        <th>商品名</th>
+                        <th>价格</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr>
+                        <td>MAC</td>
+                        <td>14555</td>
+                        <td><a href="#">添加</a></td>
+                    </tr>
+                    <tr>
+                        <td>IPHONE X</td>
+                        <td>9999</td>
+                        <td><a href="#">添加</a></td>
+                    </tr>
+                    <tr>
+                        <td>Ipad</td>
+                        <td>3566</td>
+                        <td><a href="#">添加</a></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">总计</td>
+                        <td>0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </p>
+        <h1>这里以后是一个侧栏，这是侧栏的标题</h1>
+        <h2>侧栏注册窗口的标题</h2>
+        <div>
+            <!--表单控件（文本框、单选框、复选框等）需放在form标签体内-->
+            <form method="post" action="#">
+                <label for="email">请输入邮箱地址：
+                    <input type="text" id="email" name="email" placeholder="请输入email" >
+                </label>
+                <p>邮箱地址请按要求格式输入</p>
+                <label for="password">
+                    请输入密码：
+                    <input type="password" id="password" name="password" placeholder="请输入密码">
+                </label>
+                <label for="repassword">
+                        请重复输入密码：
+                        <input type="password" id="repassword" name="repassword" placeholder="请重复输入密码">
+                </label>
+                <p>密码请为6~16位英文数字</p>
+                <span>性别：</span>
+                <label>男<input type="radio" id="gender" name="gender" value="male" checked></label>
+                <label>女<input type="radio" id="gender" name="gender" value="female"></label>
+                <span>城市：</span>
+                <select name="city">
+                    <option value="SZ">苏州</option>
+                    <option value="WX">无锡</option>
+                    <option value="NC" selected>南昌</option>
+                </select>
+                <span>爱好：</span>
+                <label>NBA<input type="checkbox" id="hobbies" name="hobbies" value="nba"></label>
+                <label>编程<input type="checkbox" id="hobbies" name="hobbies" value="coding"></label>
+                <label>游戏<input type="checkbox" id="hobbies" name="hobbies" value="game"></label>
+                <span>个人描述</span>
+                <textarea cols="40" rows="5" id="message" name="message" placeholder="多行文本，描述个人特征"></textarea>
+                <input type="submit" value="确认提交" />
+            </form>
+            <span>版权所有&copy; by flwcy</span>
+        </div>
+
     </body>
 </html>
