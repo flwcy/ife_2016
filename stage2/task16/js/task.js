@@ -15,9 +15,15 @@ var aqiData = {};
  * 然后渲染aqi-list列表，增加新增的数据
  */
 function addAqiData() {
-    // 获取用户输入的城市名称
-    var cityName = document.getElementById("aqi-city-input");
-    log(cityName.value);
+    var cityValue = getInputValue("aqi-city-input","城市名称");
+    if(isEmpty(cityValue))
+        return;
+    var aqiValue = getInputValue("aqi-value-input","空气质量指数");
+    if(isEmpty(aqiValue))
+        return;
+
+
+ 
 }
 
 /**
@@ -57,3 +63,27 @@ function init() {
 }
 
 init();
+
+function getInputValue(id,message){
+    // 获取用户输入的城市名称
+    var aqiInput = document.getElementById(id);
+    // 去除前后空格
+    var value = aqiInput.value.trim();
+    if(isEmpty(aqiInput.value.trim())) {
+        alert(message + "不能为空");
+        aqiInput.value="";
+        aqiInput.focus();
+        return null;
+    }  
+    
+    return value;
+}
+
+//判断字符是否为空的方法
+function isEmpty(obj){
+    if(typeof obj == "undefined" || obj == null || obj == ""){
+        return true;
+    }else{
+        return false;
+    }
+}
