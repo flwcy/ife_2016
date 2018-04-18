@@ -15,22 +15,53 @@ var aqiData = {};
  * 然后渲染aqi-list列表，增加新增的数据
  */
 function addAqiData() {
-    var cityValue = getInputValue("aqi-city-input","城市名称");
+    var cityValue = getInputValue("aqi-city-input","city");
     if(isEmpty(cityValue))
         return;
-    var aqiValue = getInputValue("aqi-value-input","空气质量指数");
+    var aqiValue = getInputValue("aqi-value-input","aqiValue");
     if(isEmpty(aqiValue))
         return;
-
-
- 
+    
+    aqiData.cityValue = aqiValue;
 }
 
 /**
  * 渲染aqi-table表格
  */
 function renderAqiList() {
+    if(isEmptyObject(aqiData))
+        return;
 
+    var aqiTable = document.getElementById("aqi-table");
+
+    var tr = document.createElement("tr");
+
+    // 渲染表格表头
+    var cityTh = renderTableTd("th","城市");
+    var aqiValueTh = renderTableTd("th","空气质量");
+    var optionTh = renderTableTd("th","操作");
+
+    tr.appendChild(cityTh);
+    tr.appendChild(aqiValueTh);
+    tr.appendChild(optionTh);
+    aqiTable.appendChild(tr);
+    for(var key in aqiData) {
+        var _tr = document.createElement("tr");
+        var cityTd = renderTableTd("td",key);
+        var aqiValueTd = renderTableTd("td",aqiData[key]);
+
+        var _button = document.createElement("input");
+        _button.type = "button";
+        _button.value = "删除";
+
+        var optionTd = renderTableTd("td","");
+        optionTd.appendChild(_button);
+
+        _tr.appendChild(cityTd);
+        _tr.appendChild(aqiValueTd);
+        _tr.appendChild(optionTd);
+        aqiTable.appendChild(_tr);
+    }
 }
 
 /**
@@ -64,19 +95,39 @@ function init() {
 
 init();
 
-function getInputValue(id,message){
+function getInputValue(id,key){
+    
     // 获取用户输入的城市名称
     var aqiInput = document.getElementById(id);
     // 去除前后空格
     var value = aqiInput.value.trim();
-    if(isEmpty(aqiInput.value.trim())) {
-        alert(message + "不能为空");
+    var message = null;
+    var result = value;
+    if(isEmpty(value)) {
+        message = (key == "city") ? "城市名称不能为空" : "空气质量指数不能为空";
+        result = null;
+    } else if(key == "city" && !regJudge("^[a-zA-Z\u4e00-\u9fa5]+$",value)){
+        message = "城市名称必须为中英文字符";
+        result = null;
+    } else if(key =="aqiValue" && !regJudge("^[0-9]*$",value)){
+        message ="空气质量指数必须为数字";
+        result = null;
+    }
+    if(!isEmpty(message)) {
+        alert(message);
         aqiInput.value="";
         aqiInput.focus();
-        return null;
-    }  
+    }
     
-    return value;
+    return result;
+}
+
+function isEmptyObject(obj){
+    for(var key in obj) {
+        return false;
+    }
+
+    return true;
 }
 
 //判断字符是否为空的方法
@@ -86,4 +137,28 @@ function isEmpty(obj){
     }else{
         return false;
     }
+}
+
+/**
+ * 创建表格的表头/列
+ * @param {*} key th/td
+ * @param {*} value 文本内容
+ */
+function renderTableTd(key,value) {
+    var th = document.createElement(key);
+    var txt = document.createTextNode(value);
+    th.appendChild(txt);
+    return th;
+}
+
+/**
+ * 正则判断
+ * @param {*} reg 
+ * @param {*} value 
+ */
+function regJudge(reg,value) {
+    var regExp = new RegExp(reg);
+    if(regExp.test(value))
+        return true;
+    return false;
 }
