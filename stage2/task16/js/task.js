@@ -22,17 +22,19 @@ function addAqiData() {
     if(isEmpty(aqiValue))
         return;
     
-    aqiData.cityValue = aqiValue;
+    aqiData[cityValue] = aqiValue;
 }
 
 /**
  * 渲染aqi-table表格
  */
 function renderAqiList() {
+    var aqiTable = document.getElementById("aqi-table");
+    // 先清空表格，再重新渲染
+    aqiTable.innerHTML = "";
+    
     if(isEmptyObject(aqiData))
         return;
-
-    var aqiTable = document.getElementById("aqi-table");
 
     var tr = document.createElement("tr");
 
@@ -69,18 +71,19 @@ function renderAqiList() {
  * 获取用户输入，更新数据，并进行页面呈现的更新
  */
 function addBtnHandle() {
-  addAqiData();
-  renderAqiList();
+    addAqiData();
+    renderAqiList();
 }
 
 /**
  * 点击各个删除按钮的时候的处理逻辑
  * 获取哪个城市数据被删，删除数据，更新表格显示
  */
-function delBtnHandle() {
-  // do sth.
-
-  renderAqiList();
+function delBtnHandle(e) {
+    // do sth.
+    var parent = e.parentNode.parentNode;
+    delete aqiData[parent.firstChild.innerHTML];
+    renderAqiList();
 }
 
 function init() {
@@ -90,7 +93,12 @@ function init() {
         addBtnHandle();
     });
     // 想办法给aqi-table中的所有删除按钮绑定事件，触发delBtnHandle函数
-
+    var aqiTable = document.getElementById("aqi-table");
+    aqiTable.addEventListener("click",function(e){
+        if(e.target && e.target.type == "button") {
+            delBtnHandle(e.target);
+        }
+    });
 }
 
 init();
