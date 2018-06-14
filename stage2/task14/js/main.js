@@ -60,8 +60,13 @@ var aqiData = [
             return CHINESE[num - 1];
         } else {
             log("请输入1~10");
-        }
-            
+        }        
+    }
+
+    var createLi = function(index,cityName,aqi){
+        var liEle = document.createElement("li");
+        var spanEle = 
+        log(liEle);
     }
 
     log(convert(1));
