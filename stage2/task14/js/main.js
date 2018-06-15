@@ -26,6 +26,7 @@ var aqiData = [
 
     // 从大到小排序
     var sort = function(){
+        /*
         for(var i=0;i<aqiData.length;i++){
             //var startNum = arr[i];
             for(var j=aqiData.length - 1;j>i;j--){
@@ -38,12 +39,17 @@ var aqiData = [
                 }
             }
         }
+        */
+       aqiData.sort(function(first,second){
+           return second[1] - first[1];
+       });
 
         return aqiData;
     }
 
     // 数组按条件截取
     var cut_arr = function(sortArr){
+        /*
         var arr = [];
 
         for(var i = 0;i<sortArr.length;i++){
@@ -51,6 +57,10 @@ var aqiData = [
                 arr.push(sortArr[i]);
             }
         }
+        */
+       var arr = aqiData.filter(function(element){
+            return element[1] > DEFAULT_NUM;
+        });
 
         return arr;
     }
@@ -65,10 +75,20 @@ var aqiData = [
 
     var createLi = function(index,cityName,aqi){
         var liEle = document.createElement("li");
-        var spanEle = 
-        log(liEle);
+        var spanEle = document.createElement("span");
+        spanEle.innerHTML = "第" + convert(index) + "名：" + cityName + "，" + aqi;
+        liEle.appendChild(spanEle);
+    
+        return liEle;
+    }
+    
+    var drawUl = function(){
+        var arr = cut_arr(sort());
+        arr.forEach(function(currentValue,index,arr){
+            $("#aqi-list").appendChild(createLi(index+1,currentValue[0],currentValue[1]));
+        });
     }
 
-    log(convert(1));
+    drawUl();
   })();
   
